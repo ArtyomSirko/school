@@ -13,19 +13,22 @@ public class FacultyController {
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
     }
+
     @PostMapping
     public ResponseEntity createUser(@RequestBody Faculty faculty) {
         Faculty createdUser = facultyService.createFaculty(faculty);
         return ResponseEntity.ok(createdUser);
     }
+
     @GetMapping("/{userId}")
     public ResponseEntity getUser(@PathVariable Long userId) {
         Faculty faculty = facultyService.getFacultyById(userId);
-        if(faculty == null) {
-            return ResponseEntity.notFound() .build();
+        if (faculty == null) {
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty);
     }
+
     @PutMapping()
     public ResponseEntity updateUser(@RequestBody Faculty user) {
         Faculty updatedUser = facultyService.updateFaculty(user.getId(), user);
@@ -35,8 +38,8 @@ public class FacultyController {
     @DeleteMapping("/{userId}")
     public ResponseEntity deleteUser(@PathVariable Long userId) {
         Faculty faculty = facultyService.deleteFaculty(userId);
-        if(faculty == null) {
-            return ResponseEntity.notFound() .build();
+        if (faculty == null) {
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty);
     }

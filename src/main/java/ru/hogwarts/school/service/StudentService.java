@@ -9,14 +9,16 @@ import java.util.Map;
 @Service
 public class StudentService {
 
-   private final Map<Long, Student> students = new HashMap<>();
-    private Long count=0L;
+    private final Map<Long, Student> students = new HashMap<>();
+    private Long count = 0L;
+
     public Student createUser(Student student) {
         student.setId(count);
         students.put(count, student);
         count++;
         return student;
     }
+
     public Student getUserById(Long userId) {
         return students.get(userId);
     }
