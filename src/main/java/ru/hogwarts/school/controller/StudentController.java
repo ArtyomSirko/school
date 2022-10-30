@@ -1,9 +1,12 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
+
+import java.util.Collection;
 
 @RequestMapping("/student")
 @RestController
@@ -15,14 +18,15 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity createUser(@RequestBody Student student) {
-        Student createdUser = studentService.createUser(student);
-        return ResponseEntity.ok(createdUser);
+    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+        Student createdStudent = studentService.createStudent(student);
+        return ResponseEntity.ok(createdStudent);
     }
 
+
     @GetMapping("/{userId}")
-    public ResponseEntity getUser(@PathVariable Long userId) {
-        Student student = studentService.getUserById(userId);
+    public ResponseEntity<Student> getStudent(@PathVariable Long userId) {
+        Student student = studentService.getStudentById(userId);
         if (student == null) {
             return ResponseEntity.notFound().build();
         }
@@ -30,17 +34,22 @@ public class StudentController {
     }
 
     @PutMapping()
-    public ResponseEntity updateUser(@RequestBody Student user) {
-        Student updatedUser = studentService.updateUser(user.getId(), user);
-        return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
+        Student updatedStudent = studentService.updateStudent(student);
+        if (updatedStudent == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.ok(updatedStudent);
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity deleteUser(@PathVariable Long userId) {
-        Student student = studentService.deleteUser(userId);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
+    public ResponseEntity<Student> deleteStudent(@PathVariable Long userId) {
+        studentService.deleteStudent(userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping()
+    public ResponseEntity<Collection<Student>> getAllStudent() {
+        return ResponseEntity.ok(studentService.getAllStudent());
     }
 }
