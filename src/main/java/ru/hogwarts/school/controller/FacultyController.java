@@ -4,7 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
+
+import java.util.Collection;
+import java.util.Set;
 
 @RequestMapping("/faculty")
 @RestController
@@ -44,5 +48,11 @@ public class FacultyController {
     public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getStudents/faculty/{id}")
+    public ResponseEntity<Collection<Student>> findStudentsByFaculty(@PathVariable Long id) {
+        Set<Student> studentsFromFaculty=facultyService.findStudentByFaculty(id);
+        return ResponseEntity.ok(studentsFromFaculty);
     }
 }
