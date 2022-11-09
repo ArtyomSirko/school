@@ -1,12 +1,19 @@
 package ru.hogwarts.school.model;
 
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
 public class Faculty {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String color;
 
+    @OneToMany(mappedBy = "faculty")
+    private Set<Student> students;
     public Faculty() {
     }
 
