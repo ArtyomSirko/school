@@ -52,7 +52,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable Long userId) {
+    public ResponseEntity deleteStudent(@PathVariable Long userId) {
         studentService.deleteStudent(userId);
         return ResponseEntity.ok().build();
     }

@@ -20,13 +20,14 @@ public class FacultyController {
     }
 
     @PostMapping
-    public ResponseEntity<Faculty> createUser(@RequestBody Faculty faculty) {
+    public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
         Faculty createdUser = facultyService.createFaculty(faculty);
         return ResponseEntity.ok(createdUser);
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<Faculty> getUser(@PathVariable Long id) {
+    public ResponseEntity<Faculty> getFaculty(@PathVariable Long id) {
         Faculty faculty = facultyService.getFacultyById(id);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
