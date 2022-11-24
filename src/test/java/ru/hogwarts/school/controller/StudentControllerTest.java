@@ -92,4 +92,8 @@ class StudentControllerTest {
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
 
     }
+    @Test
+    void findStudents() throws Exception {
+
+    }
 }

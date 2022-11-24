@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -23,12 +24,13 @@ public class AvatarService {
     private final AvatarRepository avatarRepository;
     private final StudentService studentService;
 
+
+
     public AvatarService(AvatarRepository avatarRepository, StudentService studentService, StudentRepository studentRepository, StudentService studentService1) {
         this.avatarRepository = avatarRepository;
         this.studentService = studentService1;
-
-
     }
+
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
         Student student = studentService.getById(studentId).orElseThrow();
@@ -64,5 +66,9 @@ public class AvatarService {
 
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public List<Avatar> getAvatarsOfStudents() {
+        return avatarRepository.getAvatarsOfStudents();
     }
 }

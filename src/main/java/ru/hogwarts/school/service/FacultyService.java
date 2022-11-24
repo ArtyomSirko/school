@@ -16,9 +16,11 @@ public class FacultyService {
         this.facultyRepository = facultyRepository;
     }
 
-
+    private long idGenerator = 1;
     public Faculty createFaculty(Faculty faculty) {
-        return facultyRepository.save(faculty);
+//        return facultyRepository.save(faculty);
+        faculty.setId(idGenerator++);
+        return faculty;
     }
 
     public Faculty getFacultyById(long id) {

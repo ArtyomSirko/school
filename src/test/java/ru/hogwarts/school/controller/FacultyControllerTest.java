@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.context.annotation.EnableMBeanExport;
+
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.repositories.AvatarRepository;
+
 import ru.hogwarts.school.repositories.FacultyRepository;
-import ru.hogwarts.school.service.AvatarService;
+
 import ru.hogwarts.school.service.FacultyService;
 
 import javax.swing.*;
@@ -40,14 +40,10 @@ class FacultyControllerTest {
     @MockBean
     private FacultyRepository facultyRepository;
 
-    //    @MockBean
-//    private AvatarRepository avatarRepository;
-//
+
     @SpyBean
     private FacultyService facultyService;
-//
-//    @SpyBean
-//    private AvatarService avatarService;
+
 
     @InjectMocks
     private FacultyController facultyController;
